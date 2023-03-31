@@ -1,5 +1,8 @@
 public with sharing class HellowWorld {
+    public string message {get; set;}
+    
     public HellowWorld() {
-System.debug('hellow world!');
+        message = 'Hellow';
+        System.debug(message);
     }
 }
