@@ -3,17 +3,15 @@ name: Deploy integration branch to integration and staging/uat orgs
 
 # Definition when the workflow should run
 on:
-    push:
-      branches: [ integration ]
-      paths:
-        - 'force-app/**'
-            
+    pull_request_review:
+    types: [submitted]            
 
 # Jobs to be executed
 jobs:
     deploy-branch-to-int-and-staging-orgs:
+
         runs-on: ubuntu-latest
-        if: ${{ github.actor != 'dependabot[bot]' }}
+        if: github.event.review.state == 'approved' && ${{ github.actor != 'dependabot[bot]' }}
         steps:
             # Install Salesforce CLI
             - name: 'Install Salesforce CLI'
