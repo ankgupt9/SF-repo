@@ -4,7 +4,7 @@ name: Deploy integration branch to integration and staging/uat orgs
 # Definition when the workflow should run
 on:
     pull_request_review:
-    types: [submitted]            
+      types: [submitted]            
 
 # Jobs to be executed
 jobs:
