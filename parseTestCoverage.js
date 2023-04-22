@@ -7,7 +7,7 @@ async function extractTestCoverage(){
     var coverage = JSON.parse(jsonString)
     var coveragePercent = coverage.total.lines.pct
     if (coveragePercent < 90 || coveragePercent == 'Unknown'){
-        core.setFailed("Low Test Coverage")
+        throw "Low test coverage"
     }
    // await fs.promises.writeFile('./coverage-percentage.txt',coveragePercent);
 }
