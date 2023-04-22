@@ -4,25 +4,37 @@ const { Octokit } = require("@octokit/core");
 
 async function extractTestCoverage(){
 
-    const octokit = new Octokit({
-        auth: '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-TOKEN'
-      })
+    // get token for octokit
+    const token = core.getInput('repo-token');
+    const octokit = new github.getOctokit(token);
+
     const jsonString = fs.readFileSync('./test-results/coverage/coverage-summary.json')
     var coverage = JSON.parse(jsonString)
     var coveragePercent = coverage.total.lines.pct
     if (coveragePercent < 90 || coveragePercent == 'Unknown'){
-        await octokit.request('POST /repos/{owner}/{repo}/statuses/{sha}', {
-            owner: 'OWNER',
-            repo: 'REPO',
-            sha: 'SHA',
-            state: 'success',
-            target_url: 'https://example.com/build/status',
-            description: 'The build succeeded!',
-            context: 'continuous-integration/jenkins',
-            headers: {
-              'X-GitHub-Api-Version': '2022-11-28'
-            }
-          })
+           const check = await octokit.rest.checks.create({
+                owner: github.context.repo.owner,
+                repo: github.context.repo.repo,
+                name: 'Readme Validator',
+                head_sha: github.context.sha,
+                status: 'completed',
+                conclusion: 'failure',
+                output: {
+                    title: 'README.md must start with a title',
+                    summary: 'Please use markdown syntax to create a title',
+                    annotations: [
+                        {
+                            path: 'README.md',
+                            start_line: 1,
+                            end_line: 1,
+                            annotation_level: 'failure',
+                            message: 'README.md must start with a header',
+                            start_column: 1,
+                            end_column: 1
+                        }
+                    ]
+                }
+            });
         throw "Low test coverage"
     }
 }
