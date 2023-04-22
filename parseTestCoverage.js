@@ -5,8 +5,9 @@ const { Octokit } = require("@octokit/core");
 async function extractTestCoverage(){
 
     // get token for octokit
-    const token = core.getInput('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');
-    const octokit = new github.getOctokit(token);
+    const octokit = new Octokit({
+      auth: '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'
+    })
 
     const jsonString = fs.readFileSync('./test-results/coverage/coverage-summary.json')
     var coverage = JSON.parse(jsonString)
