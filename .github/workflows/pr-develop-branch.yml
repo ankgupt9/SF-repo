@@ -181,11 +181,13 @@ jobs:
             - name: 'Set Test Covnerage JSON'
               id: set_var
               run: |
-                  content=`cat ./test-results/coverage/coverage-summary.json`
-                  echo "::set-output name=testCoverageJSON::$content"
+                  COVERAGE=$(cat ./test-results/coverage/coverage-summary.json) 
+                  echo "TEST_COVERAGE=$COVERAGE" >> $GITHUB_ENV 
+                # content=`cat ./test-results/coverage/coverage-summary.json`
+                # echo "::set-output name=testCoverageJSON::$content"
             - name: 'Validate Test Coverage'
               run: |
-                  echo "${{fromJson(steps.set_var.outputs.testCoverageJSON).total.lines.pct}}"
+                  echo "${{fromJson(env.TEST_COVERAGE)}}"
             # If the env variable equals all, we run all tests
             - name: 'Check-only deploy delta changes - run all tests'
               if: ${{ env.APEX_TESTS == 'all' }}
