@@ -178,10 +178,11 @@ jobs:
               run: |
                   echo ${{env.APEX_TESTS}}
                   sfdx force:source:deploy -p "changed-sources/force-app" --checkonly --testlevel RunSpecifiedTests --runtests ${{env.APEX_TESTS}} --coverageformatters=json-summary --resultsdir test-results --json
-            - name: 'Set Test Covnerage JSON'
+            - name: 'Set Test Coverage JSON'
               id: set_var
               run: |
                   COVERAGE=$(cat ./test-results/coverage/coverage-summary.json) 
+                  echo "$COVERAGE"
                   echo "TEST_COVERAGE=$COVERAGE" >> $GITHUB_ENV 
                 # content=`cat ./test-results/coverage/coverage-summary.json`
                 # echo "::set-output name=testCoverageJSON::$content"
