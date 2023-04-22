@@ -183,7 +183,7 @@ jobs:
               run: |
                   COVERAGE=$(cat ./test-results/coverage/coverage-summary.json) 
                   echo "$COVERAGE"
-                  echo "${{fromJson($COVERAGE").total.lines.pct}}"
+                  echo "${{fromJson($COVERAGE).total.lines.pct}}"
                   echo "TEST_COVERAGE<<EOF" >> $GITHUB_ENV 
                   echo $COVERAGE >> $GITHUB_ENV 
                   echo "EOF" >> $GITHUB_ENV 
