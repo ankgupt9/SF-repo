@@ -1,7 +1,6 @@
 const fs = require('fs');
 const readline = require('readline')
 const { Octokit } = require("@octokit/core");
-const core = require('@actions/core');
 const github = require('@actions/github');
 
 async function extractTestCoverage(){
