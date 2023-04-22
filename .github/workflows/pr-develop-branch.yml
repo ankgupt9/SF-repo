@@ -189,6 +189,8 @@ jobs:
             - name: 'Validate Test Coverage'
               run: |
                   npm install @octokit/core
+                  npm i @actions/core
+                  npm i @actions/github
                   node ./parseTestCoverage.js 
 
             - name: 'Deploy destructive changes (if any)'
