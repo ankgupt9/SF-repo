@@ -177,8 +177,9 @@ jobs:
               if: ${{ env.APEX_TESTS != 'all' }}
               run: |
                   echo ${{env.APEX_TESTS}}
-                  sfdx force:source:deploy -p "changed-sources/force-app" --checkonly --testlevel RunSpecifiedTests --runtests ${{env.APEX_TESTS}} --coverageformatters=text-summary --json
-
+                  sfdx force:source:deploy -p "changed-sources/force-app" --checkonly --testlevel RunSpecifiedTests --runtests ${{env.APEX_TESTS}} --coverageformatters=json-summary --resultsdir test-results --json
+                  testCoverageJSON = `cat ./test-results/coverage/coverage-summary.json`
+                  echo "${{fromJson(testCoverageJSON).total.lines.pct}}"
             # If the env variable equals all, we run all tests
             - name: 'Check-only deploy delta changes - run all tests'
               if: ${{ env.APEX_TESTS == 'all' }}
