@@ -178,16 +178,17 @@ jobs:
               run: |
                   echo ${{env.APEX_TESTS}}
                   sfdx force:source:deploy -p "changed-sources/force-app" --checkonly --testlevel RunSpecifiedTests --runtests ${{env.APEX_TESTS}} --coverageformatters=json-summary --resultsdir test-results --json
-            - name: 'Validate Test Coverage'
-              run: |
-                  node ./parseTestCoverage.js 
-                 # COVERAGE=$(cat ./coverage-percentage.txt) 
-                 # echo "$COVERAGE"
+
             # If the env variable equals all, we run all tests
             - name: 'Check-only deploy delta changes - run all tests'
               if: ${{ env.APEX_TESTS == 'all' }}
               run: |
                   sfdx force:source:deploy -p "changed-sources/force-app" --checkonly --testlevel RunLocalTests  --json
+            
+            # Validate Test Coverage and action     
+            - name: 'Validate Test Coverage'
+              run: |
+                  node ./parseTestCoverage.js 
 
             - name: 'Deploy destructive changes (if any)'
               run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" --checkonly --ignorewarnings 
