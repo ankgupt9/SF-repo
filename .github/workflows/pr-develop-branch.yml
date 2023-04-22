@@ -183,7 +183,9 @@ jobs:
               run: |
                   COVERAGE=$(cat ./test-results/coverage/coverage-summary.json) 
                   echo "$COVERAGE"
-                  echo "TEST_COVERAGE=$COVERAGE" >> $GITHUB_ENV 
+                  echo "TEST_COVERAGE<<EOF" >> $GITHUB_ENV 
+                  echo $COVERAGE >> $GITHUB_ENV 
+                  echo "EOF" >> $GITHUB_ENV 
                 # content=`cat ./test-results/coverage/coverage-summary.json`
                 # echo "::set-output name=testCoverageJSON::$content"
             - name: 'Validate Test Coverage'
