@@ -7,7 +7,9 @@ async function extractTestCoverage(){
     const jsonString = fs.readFileSync('./test-results/coverage/coverage-summary.json')
     var coverage = JSON.parse(jsonString)
     var coveragePercent = coverage.total.lines.pct
-    await fs.promises.writeFile('./coverage-percentage.txt',coveragePercent);
+    if (coveragePercent < 90)
+        core.setFailed("Low Test Coverage")
+   // await fs.promises.writeFile('./coverage-percentage.txt',coveragePercent);
 }
 
 extractTestCoverage();
