@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2023-04-21T16:30:46.119Z" hostname="https://inspiration-app-4883-dev-ed.scratch.my.salesforce.com" tests="1" failures="0"  errors="0"  time="0.04">
+        <properties>
+            <property name="commandTime" value="0.00 s"/>
+            <property name="failRate" value="0.00%"/>
+            <property name="failing" value="0"/>
+            <property name="hostname" value="https://inspiration-app-4883-dev-ed.scratch.my.salesforce.com"/>
+            <property name="orgId" value="00D8I0000004XofUAE"/>
+            <property name="passRate" value="100%"/>
+            <property name="passing" value="1"/>
+            <property name="skipped" value="0"/>
+            <property name="testExecutionTime" value="0.04 s"/>
+            <property name="testStartTime" value="2023-04-21T16:30:46.119Z"/>
+            <property name="testTotalTime" value="0.04 s"/>
+            <property name="testsRan" value="1"/>
+            <property name="username" value="test-yuhs9oai4jk2@example.com"/>
+        </properties>
+        <testcase name="HelloWorldTest" classname="HelloWorldTest" time="0.02">
+        </testcase>
+    </testsuite>
+</testsuites>
