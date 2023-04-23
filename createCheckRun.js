@@ -10,7 +10,7 @@ async function createCheckrun(){
 
     // get token for octokit
     
-    var githubToken = process.env.GITHIB_TOKEN
+   // var githubToken = process.env.GITHIB_TOKEN
     const octokit = new Octokit({
       authStrategy: createAppAuth,
       auth: {
