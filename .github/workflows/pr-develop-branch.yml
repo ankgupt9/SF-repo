@@ -195,7 +195,9 @@ jobs:
             - name: 'Validate Test Coverage'
               run: |
                   TOKEN=${{ secrets.ANKUR_GIT_APP_KEY }}
-                  echo "GITHIB_TOKEN=$TOKEN" >> $GITHUB_ENV
+                  echo"echo "GITHIB_TOKEN<<EOF" >> $GITHUB_ENV
+                  echo $TOKEN >> $GITHUB_ENV
+                  echo "EOF" >> $GITHUB_ENV
                   npm install @octokit/core
                   npm i @actions/core
                   npm i @actions/github
