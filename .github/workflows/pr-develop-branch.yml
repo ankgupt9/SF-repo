@@ -70,7 +70,8 @@ jobs:
               run: |
                   TOKEN=${{ secrets.ANKUR_GIT_APP_KEY }}
                   echo "GITHIB_TOKEN=$TOKEN" >> $GITHUB_ENV
-                  npm install @octokit/core
+                  npm install @octokit/core 
+                  npm install @octokit/app
                   npm i @actions/core
                   npm i @actions/github
                   node ./createCheckRun.js 

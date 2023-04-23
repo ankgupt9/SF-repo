@@ -3,7 +3,7 @@ const readline = require('readline')
 const { Octokit } = require("@octokit/core");
 const github = require('@actions/github');
 const core = require('@actions/core');
-import { App } from "octokit";
+const Auth = require('@octokit/auth-app')
 
 
 async function createCheckrun(){
@@ -11,14 +11,20 @@ async function createCheckrun(){
     // get token for octokit
     
     var githubToken = process.env.GITHIB_TOKEN
-    const app = new App({
-      appId: 322743,
-      privateKey: githubToken,
+    const octokit = new Auth({
+      authStrategy: createAppAuth,
+      auth: {
+              appId: 322743,
+              privateKey: githubToken,
+              cliendId: "Iv1.5b9fa30bae13a158",
+              clientSecret:"81e639ebfd5f56cf63ef708c3ce2e477d147b431",
+              installationId:36741506,
+            }
     });
    /* const octokit = new Octokit({
       auth: "Bearer " + githubToken
     })*/
-    const octokit = await app.getInstallationOctokit(36741506);
+    //const octokit = await app.getInstallationOctokit(36741506);
     
       await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
         owner: github.context.repo.owner,
