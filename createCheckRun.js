@@ -3,7 +3,7 @@ const readline = require('readline')
 const { Octokit } = require("@octokit/core");
 const github = require('@actions/github');
 const core = require('@actions/core');
-const Auth = require('@octokit/auth-app')
+const {createAppAuth} = require('@octokit/auth-app');
 
 
 async function createCheckrun(){
@@ -11,7 +11,7 @@ async function createCheckrun(){
     // get token for octokit
     
     var githubToken = process.env.GITHIB_TOKEN
-    const octokit = new Auth({
+    const octokit = new Octokit({
       authStrategy: createAppAuth,
       auth: {
               appId: 322743,
