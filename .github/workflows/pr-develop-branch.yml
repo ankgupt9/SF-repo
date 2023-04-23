@@ -27,7 +27,8 @@ jobs:
         # In this case, we are going to run our commands on the latest version
         # of ubuntu
         runs-on: ubuntu-latest
-        permissions:
+        permissions: write-all
+            id-token: write
             security-events: write
             actions: read
             contents: read
