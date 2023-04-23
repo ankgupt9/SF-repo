@@ -7,7 +7,7 @@ const core = require('@actions/core');
 async function extractTestCoverage(){
 
     // get token for octokit
-    var githubToken = process.env.GITHUB_TOKEN
+    var githubToken = process.env.GITHIB_TOKEN
     const octokit = new Octokit({
       auth: githubToken
     })
