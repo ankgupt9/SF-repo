@@ -18,10 +18,10 @@ async function extractTestCoverage(){
     if (coveragePercent < 90 || coveragePercent == 'Unknown'){
             
       await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
-        owner: github.context.repo.owner,
+        owner: github.context.owner,
         repo: github.context.repo,
         name: 'mighty_readme',
-        head_sha: github.context.head_sha,
+        head_sha: github.context.sha,
         status: 'completed',
         conclusion: 'failure',
         output: {
