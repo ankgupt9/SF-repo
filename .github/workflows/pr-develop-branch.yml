@@ -70,6 +70,15 @@ jobs:
             # Once a developer has specified a list of classes to run, we need to be able
             # to extract this information from the PR, and pass it on the the VM.
 
+            - uses: LouisBrunner/checks-action@v1.3.1
+            id: check
+            with:
+              sha: ${{ github.sha }}
+              token: ${{ secrets.GITHUB_TOKEN }}
+              # token: ${{ github.token }}
+              name: Test Basic Success
+              conclusion: success  
+
             - name: 'Read PR Body'
               env:
                 # The pull request body is available through the github context object
