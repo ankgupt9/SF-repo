@@ -9,7 +9,7 @@ async function extractTestCoverage(){
     // get token for octokit
     var githubToken = process.env.GITHIB_TOKEN
     const octokit = new Octokit({
-      auth: githubToken
+      auth: "Bearer " + githubToken
     })
 
     const jsonString = fs.readFileSync('./test-results/coverage/coverage-summary.json')
