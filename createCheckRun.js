@@ -9,6 +9,7 @@ import { App } from "octokit";
 async function createCheckrun(){
 
     // get token for octokit
+    
     var githubToken = process.env.GITHIB_TOKEN
     const app = new App({
       appId: 322743,
