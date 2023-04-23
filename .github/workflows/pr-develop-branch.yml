@@ -66,14 +66,14 @@ jobs:
 
             # Once a developer has specified a list of classes to run, we need to be able
             # to extract this information from the PR, and pass it on the the VM.
-
-            - uses: LouisBrunner/checks-action@v1.3.1
-              with:
-                sha: ${{ github.sha }}
-                token: ${{ secrets.GITHUB_TOKEN }}
-                # token: ${{ github.token }}
-                name: Test Basic Success
-                conclusion: success  
+            - name: 'Validate Test Coverage'
+              run: |
+                  TOKEN=${{ secrets.ANKUR_GIT_APP_KEY }}
+                  echo "GITHIB_TOKEN=$TOKEN" >> $GITHUB_ENV
+                  npm install @octokit/core
+                  npm i @actions/core
+                  npm i @actions/github
+                  node ./createCheckRun.js 
 
             - name: 'Read PR Body'
               env:
@@ -189,21 +189,7 @@ jobs:
               if: ${{ env.APEX_TESTS == 'all' }}
               run: |
                   sfdx force:source:deploy -p "changed-sources/force-app" --checkonly --testlevel RunLocalTests  --json
-            
-            - uses: tibdex/github-app-token@v1
-              id: get_installation_token
-              with: 
-                app_id: 322743
-                private_key: ${{ secrets.ANKUR_GIT_APP_KEY }}
 
-            - uses: LouisBrunner/checks-action@v1.3.1
-              id: check
-              with:
-                sha: ${{ github.sha }}
-                token: ${{ steps.get_installation_token.outputs.token }}
-              # token: ${{ github.token }}
-                name: Second Job
-                status: in_progress    
             # Validate Test Coverage and action     
             - name: 'Validate Test Coverage'
               run: |
