@@ -16,14 +16,19 @@ async function extractTestCoverage(){
     var coverage = JSON.parse(jsonString)
     var coveragePercent = coverage.total.lines.pct
     if (coveragePercent < 90 || coveragePercent == 'Unknown'){
-            await octokit.request('POST /repos/{owner}/{repo}/statuses/{sha}', {
-              owner: github.context.owner,
-              repo: github.context.repo,
-              sha: github.context.sha,
-              state: 'failure',
-              target_url: 'https://example.com/build/status',
-              description: 'The build succeeded!',
-              context: 'continuous-integration/jenkins',
+            await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
+              owner: github.context.repo.owner,
+              repo: github.context.repo.repo,
+              name: 'mighty_readme',
+              head_sha: github.context.sha,
+              status: 'completed',
+              external_id: '42',
+              started_at: '2018-05-04T01:14:52Z',
+              output: {
+                title: 'Mighty Readme report',
+                summary: '',
+                text: ''
+              },
               headers: {
                 'X-GitHub-Api-Version': '2022-11-28'
               }
