@@ -7,15 +7,16 @@ const core = require('@actions/core');
 async function extractTestCoverage(){
 
     // get token for octokit
+    var githubToken = process.env.GITHUB_TOKEN
     const octokit = new Octokit({
-      auth: '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'
+      auth: githubToken
     })
 
     const jsonString = fs.readFileSync('./test-results/coverage/coverage-summary.json')
     var coverage = JSON.parse(jsonString)
     var coveragePercent = coverage.total.lines.pct
     if (coveragePercent < 90 || coveragePercent == 'Unknown'){
-            /*await octokit.request('POST /repos/{owner}/{repo}/statuses/{sha}', {
+            await octokit.request('POST /repos/{owner}/{repo}/statuses/{sha}', {
               owner: 'ankgupt9',
               repo: 'sf-repo',
               sha: github.context.sha,
@@ -26,7 +27,7 @@ async function extractTestCoverage(){
               headers: {
                 'X-GitHub-Api-Version': '2022-11-28'
               }
-            })*/
+            })
             core.setFailed('Low Code Coverage');
     }
 }

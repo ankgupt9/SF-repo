@@ -187,6 +187,8 @@ jobs:
             
             # Validate Test Coverage and action     
             - name: 'Validate Test Coverage'
+              env:
+                GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
               run: |
                   npm install @octokit/core
                   npm i @actions/core
