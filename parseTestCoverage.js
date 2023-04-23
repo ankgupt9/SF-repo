@@ -14,8 +14,8 @@ async function extractTestCoverage(){
     const jsonString = fs.readFileSync('./test-results/coverage/coverage-summary.json')
     var coverage = JSON.parse(jsonString)
     var coveragePercent = coverage.total.lines.pct
-   /* if (coveragePercent < 90 || coveragePercent == 'Unknown'){
-            await octokit.request('POST /repos/{owner}/{repo}/statuses/{sha}', {
+    if (coveragePercent < 90 || coveragePercent == 'Unknown'){
+            /*await octokit.request('POST /repos/{owner}/{repo}/statuses/{sha}', {
               owner: 'ankgupt9',
               repo: 'sf-repo',
               sha: github.context.sha,
