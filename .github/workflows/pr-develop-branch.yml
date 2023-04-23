@@ -28,10 +28,6 @@ jobs:
         # of ubuntu
         runs-on: ubuntu-latest
         permissions: write-all
-            id-token: write
-            security-events: write
-            actions: read
-            contents: read
         if: ${{ github.actor != 'dependabot[bot]' }}
         steps:
             # Now we install nodejs in the VM, and specify version 14
