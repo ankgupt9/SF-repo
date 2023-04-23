@@ -189,7 +189,7 @@ jobs:
               id: get_installation_token
               with: 
                 app_id: 322743
-                private_key: ${{ secrets.GITHUB_TOKEN }}
+                private_key: ${{ secrets.ANKUR_GIT_APP_KEY }}
 
             - uses: LouisBrunner/checks-action@v1.3.1
               id: check
