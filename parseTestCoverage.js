@@ -3,14 +3,21 @@ const readline = require('readline')
 const { Octokit } = require("@octokit/core");
 const github = require('@actions/github');
 const core = require('@actions/core');
+import { App } from "octokit";
+
 
 async function extractTestCoverage(){
 
     // get token for octokit
     var githubToken = process.env.GITHIB_TOKEN
-    const octokit = new Octokit({
+    const app = new App({
+      appId: 322743,
+      privateKey: githubToken,
+    });
+   /* const octokit = new Octokit({
       auth: "Bearer " + githubToken
-    })
+    })*/
+    const octokit = await app.getInstallationOctokit(36741506);
 
     const jsonString = fs.readFileSync('./test-results/coverage/coverage-summary.json')
     var coverage = JSON.parse(jsonString)
