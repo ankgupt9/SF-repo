@@ -16,7 +16,17 @@ const app = new App({
 });
 const octokit = await app.getInstallationOctokit(36741506);
 
-await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
+await octokit.request('GET /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
+  owner: github.context.repo.owner,
+  repo: github.context.repo,
+  name: 'mighty_readdme',
+  commit_sha: github.context.sha,
+  headers: {
+    'X-GitHub-Api-Version': '2022-11-28'
+  }
+})
+
+const temp = await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
   owner: github.context.repo.owner,
   repo: github.context.repo,
   name: 'mighty_readme',
