@@ -5,7 +5,7 @@ const github = require('@actions/github');
 const core = require('@actions/core');
 const {createAppAuth} = require('@octokit/auth-app');
 const pathToPrivateKey = path.join(__dirname, 'private-key.pem');
-const privateKey = fs.readFileSync(pathToPrivateKey, 'utf-8');
+const privateKey = fs.readFileSync(pathToPrivateKey);
 
 async function createCheckrun(){
 
