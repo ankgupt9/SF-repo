@@ -29,28 +29,6 @@ await octokit.request('POST /repos/{owner}/{repo}/commits/{commit_sha}/comments'
   }
 })
 
-try{
-const temp = await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
-  owner: github.context.repo.owner,
-  repo: github.context.repo,
-  name: 'mighty_readme',
-  head_sha: github.context.sha,
-  status: 'in_progress',
-  external_id: '42',
-  started_at: '2018-05-04T01:14:52Z',
-  output: {
-    title: 'Mighty Readme report',
-    summary: '',
-    text: ''
-  },
-  headers: {
-    'X-GitHub-Api-Version': '2022-11-28'
-  }
-})
-}catch (error){
-  throw(error);
-}
-throw('Exit');
 /*
 const auth = createAppAuth({
   id: 322743,
