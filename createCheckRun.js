@@ -14,7 +14,7 @@ const app = new App({
   appId: 322743,
   privateKey,
 });
-const octokit = await app.getInstallationOctokit(36741506);
+const octokit = await app.getInstallationOctokit(36805855);
 
 const respone = await octokit.request('POST /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
   owner: github.context.repo.owner,
