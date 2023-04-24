@@ -16,10 +16,13 @@ const app = new App({
 });
 const octokit = await app.getInstallationOctokit(36741506);
 
-await octokit.request('GET /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
+await octokit.request('POST /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
   owner: github.context.repo.owner,
   repo: github.context.repo,
-  name: 'mighty_reafddme',
+  body: 'Great stuff',
+  path: 'file1.txt',
+  position: 4,
+  line: 1,
   commit_sha: github.context.sha,
   headers: {
     'X-GitHub-Api-Version': '2022-11-28'
