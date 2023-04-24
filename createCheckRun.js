@@ -16,29 +16,23 @@ const app = new App({
 });
 const octokit = await app.getInstallationOctokit(36741506);
 
-const check = await octokit.rest.checks.create({
+await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
   owner: github.context.repo.owner,
   repo: github.context.repo,
-  name: 'Readme Validator',
+  name: 'mighty_readme',
   head_sha: github.context.sha,
-  status: 'completed',
-  conclusion: 'failure',
+  status: 'in_progress',
+  external_id: '42',
+  started_at: '2018-05-04T01:14:52Z',
   output: {
-      title: 'README.md must start with a title',
-      summary: 'Please use markdown syntax to create a title',
-      annotations: [
-          {
-              path: 'README.md',
-              start_line: 1,
-              end_line: 1,
-              annotation_level: 'failure',
-              message: 'README.md must start with a header',
-              start_column: 1,
-              end_column: 1
-          }
-      ]
+    title: 'Mighty Readme report',
+    summary: '',
+    text: ''
+  },
+  headers: {
+    'X-GitHub-Api-Version': '2022-11-28'
   }
-});
+})
 
 /*
 const auth = createAppAuth({
