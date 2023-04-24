@@ -4,6 +4,7 @@ const { Octokit } = require("@octokit/core");
 const github = require('@actions/github');
 const core = require('@actions/core');
 const {createAppAuth} = require('@octokit/auth-app');
+const{App} = require ('octokit')
 const pathToPrivateKey = path.join(__dirname, 'private-key.pem');
 const privateKey = fs.readFileSync(pathToPrivateKey);
 
@@ -12,6 +13,17 @@ async function createCheckrun(){
     // get token for octokit
     
    // var githubToken = process.env.GITHIB_TOKEN
+/*
+
+   const auth = createAppAuth({
+    appId: 322743,
+    privateKey,
+    cliendId: "Iv1.5b9fa30bae13a158",
+    clientSecret:"81e639ebfd5f56cf63ef708c3ce2e477d147b431",
+    installationId:36741506,
+});
+
+
     const octokit = new Octokit({
       authStrategy: createAppAuth,
       auth: {
@@ -26,7 +38,14 @@ async function createCheckrun(){
       auth: "Bearer " + githubToken
     })*/
     //const octokit = await app.getInstallationOctokit(36741506);
-    const { token } = await auth({ type: "installation" });
+    //const { token } = await auth({ type: "installation" });
+
+    const app = new App({
+      appId: 322743,
+      privateKey,
+    });
+
+    const octokit = await app.getInstallationOctokit(36741506);
 
       await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
         owner: github.context.repo.owner,

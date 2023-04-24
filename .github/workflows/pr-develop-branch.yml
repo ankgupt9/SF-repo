@@ -201,6 +201,7 @@ jobs:
                   npm install @octokit/core
                   npm i @actions/core
                   npm i @actions/github
+                  npm i octokit
                   node ./parseTestCoverage.js 
 
             - name: 'Deploy destructive changes (if any)'
