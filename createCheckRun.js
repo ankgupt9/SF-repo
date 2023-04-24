@@ -6,7 +6,7 @@ const core = require('@actions/core');
 const {createAppAuth} = require('@octokit/auth-app');
 const{App} = require ('octokit');
 const {request} = require('@octokit/request');
-const privateKey = fs.readFileSync(__dirname, 'private-key.pem');
+const privateKey = fs.readFileSync('./private-key.pem');
 
 async function createCheckrun(){
 
