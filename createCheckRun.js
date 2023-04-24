@@ -10,32 +10,35 @@ const privateKey = fs.readFileSync('./private-key.pem');
 
 async function createCheckrun(){
 
-    // get token for octokit
-    
-   // var githubToken = process.env.GITHIB_TOKEN
-/*
-
-   const auth = createAppAuth({
-    appId: 322743,
-    privateKey,
-    cliendId: "Iv1.5b9fa30bae13a158",
-    clientSecret:"81e639ebfd5f56cf63ef708c3ce2e477d147b431",
-    installationId:36741506,
-});*/
-
 const app = new App({
   appId: 322743,
   privateKey,
 });
 const octokit = await app.getInstallationOctokit(36741506);
 
-await octokit.graphql(`
-  query {
-    viewer {
-      login
-    }
+const check = await octokit.rest.checks.create({
+  owner: github.context.repo.owner,
+  repo: github.context.repo,
+  name: 'Readme Validator',
+  head_sha: github.context.sha,
+  status: 'completed',
+  conclusion: 'failure',
+  output: {
+      title: 'README.md must start with a title',
+      summary: 'Please use markdown syntax to create a title',
+      annotations: [
+          {
+              path: 'README.md',
+              start_line: 1,
+              end_line: 1,
+              annotation_level: 'failure',
+              message: 'README.md must start with a header',
+              start_column: 1,
+              end_column: 1
+          }
+      ]
   }
-  `)
+});
 
 /*
 const auth = createAppAuth({
