@@ -66,7 +66,7 @@ jobs:
 
             # Once a developer has specified a list of classes to run, we need to be able
             # to extract this information from the PR, and pass it on the the VM.
-            - name: 'Validate Test Coverage'
+            - name: 'Validate octokit'
               run: |
                   npm install @octokit/core 
                   npm install @octokit/auth-app
