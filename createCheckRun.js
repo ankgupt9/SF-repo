@@ -24,6 +24,21 @@ async function createCheckrun(){
     installationId:36741506,
 });*/
 
+const app = new App({
+  appId: 322743,
+  privateKey,
+});
+const octokit = await app.getInstallationOctokit(36741506);
+
+await octokit.graphql(`
+  query {
+    viewer {
+      login
+    }
+  }
+  `)
+  
+/*
 const auth = createAppAuth({
   id: 322743,
   privateKey,
@@ -39,7 +54,7 @@ const requestWithAuth = request.defaults({
 const result = await requestWithAuth("GET /orgs/:org/repos", {
   org: "ankgupt9",
   type: "public"
-});
+});*/
    
 
 
