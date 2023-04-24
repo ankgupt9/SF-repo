@@ -45,9 +45,9 @@ const temp = await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
   }
 })
 }catch (error){
-  throw(throw);
+  throw(error);
 }
-
+throw('Exit');
 /*
 const auth = createAppAuth({
   id: 322743,
