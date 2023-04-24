@@ -42,7 +42,7 @@ async function createCheckrun(){
 
     const app = new App({
       appId: 322743,
-      privateKey,
+      privateKey: privateKey,
     });
 
     const octokit = await app.getInstallationOctokit(36741506);
