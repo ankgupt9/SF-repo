@@ -26,6 +26,7 @@ await octokit.request('GET /repos/{owner}/{repo}/commits/{commit_sha}/comments',
   }
 })
 
+try{
 const temp = await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
   owner: github.context.repo.owner,
   repo: github.context.repo,
@@ -43,6 +44,9 @@ const temp = await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
     'X-GitHub-Api-Version': '2022-11-28'
   }
 })
+}catch (error){
+  throw(throw);
+}
 
 /*
 const auth = createAppAuth({
