@@ -72,8 +72,10 @@ jobs:
                   echo "GITHIB_TOKEN=$TOKEN" >> $GITHUB_ENV
                   npm install @octokit/core 
                   npm install @octokit/auth-app
-                  npm i @actions/core
-                  npm i @actions/github
+                  npm install @actions/core
+                  npm install @actions/github
+                  npm install octokit
+                  npm install @octokit/request
                   node ./createCheckRun.js 
 
             - name: 'Read PR Body'
