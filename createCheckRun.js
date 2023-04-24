@@ -6,8 +6,7 @@ const core = require('@actions/core');
 const {createAppAuth} = require('@octokit/auth-app');
 const{App} = require ('octokit');
 const {request} = require('@octokit/request');
-const pathToPrivateKey = path.join(__dirname, 'private-key.pem');
-const privateKey = fs.readFileSync(pathToPrivateKey);
+const privateKey = fs.readFileSync(__dirname, 'private-key.pem');
 
 async function createCheckrun(){
 
@@ -37,7 +36,7 @@ await octokit.graphql(`
     }
   }
   `)
-  
+
 /*
 const auth = createAppAuth({
   id: 322743,
