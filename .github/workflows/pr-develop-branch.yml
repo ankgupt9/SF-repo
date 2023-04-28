@@ -69,7 +69,7 @@ jobs:
             - uses: tibdex/github-app-token@v1
               id: get_installation_token
               run: |
-              content=`cat ./private-key.pem`
+                  content=`cat ./private-key.pem`
               with: 
                 app_id: 322743
                 private_key: ${{ content }}
