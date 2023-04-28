@@ -66,13 +66,15 @@ jobs:
 
             # Once a developer has specified a list of classes to run, we need to be able
             # to extract this information from the PR, and pass it on the the VM.
-            - uses: tibdex/github-app-token@v1
-              id: get_installation_token
+            - id: set_var
               run: |
                   content=`cat ./private-key.pem`
+                  echo "::set-output name=key::$content"
+            - uses: tibdex/github-app-token@v1
+              id: get_installation_token
               with: 
                 app_id: 322743
-                private_key: ${{ content }}
+                private_key: ${{ steps.set_var.outputs.key }}
             - uses: LouisBrunner/checks-action@v1.3.1
               id: check
               with:
