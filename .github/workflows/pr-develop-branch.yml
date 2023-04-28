@@ -69,14 +69,7 @@ jobs:
 
             - name: 'Validate octokit'
               run: |
-                  npm install @octokit/core 
-                  npm install @octokit/auth-app
-                  npm install @actions/core
-                  npm install @actions/github
                   npm install octokit
-                  npm install @octokit/request
-                  export GEM_HOME="$HOME/.gem"
-                  gem install jwt
                   node ./createCheckRun.js 
                   
 
