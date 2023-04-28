@@ -10,20 +10,25 @@ const privateKey = fs.readFileSync('./private-key.pem');
 
 async function createCheckrun(){
 
-const app = new App({
-  appId: 322743,
-  privateKey,
-});
-const octokit = await app.getInstallationOctokit(36805855);
+// Octokit.js
+// https://github.com/octokit/core.js#readme
+const octokit = new Octokit({
+  auth: 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2ODI2NTE5NjIsImV4cCI6MTY4MjY1MjYyMiwiaXNzIjoiMzIyNzQzIn0.QUvMIL7cKNlQfZiIc8mlunFzzRHLuIwRIsYAHQUaHJ2X5b_n_7hkqP3Kdl0XXhEhSJdiaFh874AX8SjYGWSD385NSRHX9I_yvLIRhSGWFzvR8VO5Nr1A1rZ5Hf5VBXakDBwt4ZJgoLd8nBIzDixfi44k6IfxzcyuUODQEjjvQiF1vLfD9IM2bJ_7Yg6fk-zgknJoSpytmS2cXiJKNyyUFak2Ttss0pRNy-d-Wc8JH1ABPg3rFO2wrlD62pktqcUDJkeQtri8ZJeuv06mRLHzXpU2aLEq2MebQYHDl42UWk99_vJh2AAtXuZACPsTGP2RS1qEeKI131N54882W6DGDA'
+})
 
-const respone = await octokit.request('POST /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
+await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
   owner: github.context.repo.owner,
   repo: github.context.repo,
-  body: 'Great stuff',
-  path: 'file1.txt',
-  position: 4,
-  line: 1,
-  commit_sha: github.context.sha,
+  name: 'mighty_readme',
+  head_sha: github.context.sha,
+  status: 'in_progress',
+  external_id: '42',
+  started_at: '2018-05-04T01:14:52Z',
+  output: {
+    title: 'Mighty Readme report',
+    summary: '',
+    text: ''
+  },
   headers: {
     'X-GitHub-Api-Version': '2022-11-28'
   }
