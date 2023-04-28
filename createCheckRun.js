@@ -7,14 +7,31 @@ const {createAppAuth} = require('@octokit/auth-app');
 const{App} = require ('octokit');
 const {request} = require('@octokit/request');
 const privateKey = fs.readFileSync('./private-key.pem');
+const jwt = require('jwt')
+const openssl = require('openssl')
 
 async function createCheckrun(){
 
-const app = new App({
-  appId: 322743,
-  privateKey,
-});
-const octokit = await app.getInstallationOctokit(36741506);
+  let private_pem = File.read("./private-key.pem");
+  let private_key = new openssl.PKey.RSA(private_pem);
+  
+  // Generate the JWT
+  let payload = {
+    // issued at time, 60 seconds in the past to allow for clock drift
+    iat: parseInt(Time.now) - 60,
+  
+    // JWT expiration time (10 minute maximum)
+    exp: parseInt(Time.now) + (10 * 60),
+  
+    // GitHub App's identifier
+    iss: "322743"
+  };
+  
+  let jwtToken = JWT.encode(payload, private_key, "RS256");
+
+  const octokit = new Octokit({
+    auth: jwtToken
+  })
 
 const respone = await octokit.request('POST /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
   owner: github.context.repo.owner,
