@@ -75,6 +75,7 @@ jobs:
                   npm install @actions/github
                   npm install octokit
                   npm install @octokit/request
-                  node ./createCheckRun.js 
                   gem install jwt
+                  node ./createCheckRun.js 
+                  
 
