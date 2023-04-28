@@ -1,18 +1,25 @@
 const fs = require('fs');
-const{App} = require ('octokit');
+const { Octokit } = require("@octokit/core");
+const { createAppAuth, createOAuthUserAuth } = require("@octokit/auth-app");
 
 async function createCheckrun(){
 
   let private_pem = fs.readFileSync("./private-key.pem");
   
-  const app = new App({
-    appId: 322743,
-    privateKey: {private_pem},
+  const installationOctokit = new Octokit({
+    authStrategy: createAppAuth,
+    auth: {
+      appId: 322743,
+      privateKey: private_pem,
+      installationId: 36805855,
+    },
+  });
+  await installationOctokit.request("POST /repos/{owner}/{repo}/issues", {
+    owner: "ankgupt9",
+    repo: "sf-repo",
+    title: "title",
   });
 
-const octokit = await app.getInstallationOctokit(36805855);
-
-await octokit.request("GET /meta")
 
 /*
 const auth = createAppAuth({

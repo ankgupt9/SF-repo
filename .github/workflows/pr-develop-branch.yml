@@ -66,23 +66,10 @@ jobs:
 
             # Once a developer has specified a list of classes to run, we need to be able
             # to extract this information from the PR, and pass it on the the VM.
-            - name: Generate JWT and token
-              id: generate-github-app-tokens
-              uses: jamestrousdale/github-app-jwt-token@0.1.4 # <- Put version in here
-              with:
-                app-id: '322743'
-                app-installation-id: '36805855'
-                private-key: ${{ secrets.ANKUR_GIT_APP_KEY }}
 
-            - name: Set environment from action output
-              run: |
-                    {
-                      echo "GITHUB_APP_JWT=${{ steps.generate-github-app-tokens.outputs.jwt }}"
-                      echo "GITHUB_APP_ACCESS_TOKEN=${{ steps.generate-github-app-tokens.outputs.access-token }}"
-                    } >> ${GITHUB_ENV}
             - name: 'Validate octokit'
               run: |
-                  npm install octokit
+                  nnpm install @octokit/core @octokit/auth-app
                   node ./createCheckRun.js 
                   
 
