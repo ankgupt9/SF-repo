@@ -68,9 +68,11 @@ jobs:
             # to extract this information from the PR, and pass it on the the VM.
             - uses: tibdex/github-app-token@v1
               id: get_installation_token
+              run: |
+              content=`cat ./private-key.pem`
               with: 
                 app_id: 322743
-                private_key: ${{ secrets.GITHUB_TOKEN }}
+                private_key: ${{ content }}
             - uses: LouisBrunner/checks-action@v1.3.1
               id: check
               with:
