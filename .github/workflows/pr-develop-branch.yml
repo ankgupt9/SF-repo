@@ -70,7 +70,7 @@ jobs:
             - name: 'Validate octokit'
               run: |
                   echo "SECRET_CODE<<EOF" >> $GITHUB_ENV
-                  echo ${{secret.ANKUR_GIT_APP_KEY}} >> $GITHUB_ENV
+                  echo ${{secrets.ANKUR_GIT_APP_KEY}} >> $GITHUB_ENV
                   echo "EOF" >> $GITHUB_ENV
                   npm install @octokit/core @octokit/auth-app
                   node ./createCheckRun.js 
