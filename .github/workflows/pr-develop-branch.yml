@@ -79,8 +79,8 @@ jobs:
               id: check
               with:
                 sha: ${{ github.sha }}
-                token: ${{ steps.get_installation_token.outputs.token }}
-        # token: ${{ github.token }}
+                #token: ${{ steps.get_installation_token.outputs.token }}
+                token: ${{ github.token }}
                 name: Second Job
                 status: in_progress
 
