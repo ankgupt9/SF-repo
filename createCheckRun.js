@@ -1,8 +1,9 @@
+const fs = require('fs');
 const{App} = require ('octokit');
 
 async function createCheckrun(){
 
-  let private_pem = File.read("./private-key.pem");
+  let private_pem = fs.readFileSync("./private-key.pem");
   let private_key = new openssl.PKey.RSA(private_pem);
 
   
