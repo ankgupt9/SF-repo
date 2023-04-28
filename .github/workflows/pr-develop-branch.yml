@@ -66,21 +66,17 @@ jobs:
 
             # Once a developer has specified a list of classes to run, we need to be able
             # to extract this information from the PR, and pass it on the the VM.
-            - id: set_var
-              run: |
-                  content=`cat ./private-key.pem`
-                  echo "::set-output name=key::$content"
-            - uses: tibdex/github-app-token@v1
+            - uses: tibdex/github-app-token@36464acb844fc53b9b8b2401da68844f6b05ebb0
               id: get_installation_token
               with: 
                 app_id: 322743
-                private_key: ${{ steps.set_var.outputs.key }}
+                private_key: ${{ secrets.ANKUR_GIT_APP_KEY }}
             - uses: LouisBrunner/checks-action@v1.3.1
               id: check
               with:
                 sha: ${{ github.sha }}
-                #token: ${{ steps.get_installation_token.outputs.token }}
-                token: ${{ github.token }}
+                token: ${{ steps.generate_token.outputs.token }}
+                #token: ${{ github.token }}
                 name: Second Job
                 status: in_progress
 
