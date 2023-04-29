@@ -4,13 +4,13 @@ const { createAppAuth, createOAuthUserAuth } = require("@octokit/auth-app");
 
 async function createCheckrun(){
 
-  const private_pem = fs.readFileSync("./private-key.pem");
+  const private_pem = fs.readFileSync("./private-key.pem",'utf-8');
   
   const installationOctokit = new Octokit({
     authStrategy: createAppAuth,
     auth: {
       appId: 322743,
-      privateKey: process.env.SECRET_CODE,
+      privateKey: private_pem,
       installationId: 36805855,
     },
   });
