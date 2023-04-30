@@ -78,6 +78,5 @@ jobs:
                   npm i @actions/github
                   npm i octokit
                   node ./newCheckRun.js
-                # node ./generateInstallationToken.js
-                # node ./createCheckRun.js 
+
 
