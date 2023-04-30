@@ -9,6 +9,8 @@ async function newCheckrun(){
     appId: process.env.ANKUR_GIT_APP_ID,
     privateKey,
   });
+
+  console.log('SHA' + github.context.sha)
   const octokit = await app.getInstallationOctokit(process.env.ANKUR_GIT_APP_INSTALL_ID);
   await octokit.request('POST /repos/{owner}/{repo}/check-runs', {
     owner: github.context.repo.owner,
