@@ -1,40 +1,43 @@
-const fs = require('fs');
-const { App } = require("octokit");
+const https = require('https')
+const github = require('@actions/github');
 
 async function createCheckrun(){
 
-  const privateKey = fs.readFileSync("./private-key.pem",'utf-8');
-  
-  const app = new App({
-    appId: 322743,
-    privateKey,
-  });
-  
-  const octokit = await app.getInstallationOctokit(36741506);
+  var str = '';
+  const repoName = github.context.repo.repo;
+  const owner = github.context.repo.owner
 
-  await octokit.request("GET /repos/{owner}/{repo}/issues", {
-    owner: "ankgupt9",
-    repo: "af-repo",
-    per_page: 2
-  });
-/*
-const auth = createAppAuth({
-  id: 322743,
-  privateKey,
-  installationId: 36741506
-});
-
-const requestWithAuth = request.defaults({
-  request: {
-    hook: auth.hook
+  const options = {
+    method: 'post',
+    headers: {
+      'User-Agent': 'GitHub App',
+      'authorization': 'Bearer ' + process.env.INSTALLATION_TOKEN,
+      'accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version':'2022-11-28'
+    }
   }
-})
-
-const result = await requestWithAuth("GET /orgs/:org/repos", {
-  org: "ankgupt9",
-  type: "public"
-});*/
-   
+  
+  const post_data = JSON.stringify({ 
+      "name": "mighty_readme",
+      "head_sha": github.context.sha,
+      "status": "completed",
+      "started_at": "2023-04-29T19:39:10Z",
+      "conclusion": "success",
+      "completed_at": "2023-04-29T19:49:10Z"
+  })
+  
+  const req = https.request('https://api.github.com/repos/' + owner + '/' + repoName + '/check-runs',options, function(res) {
+    console.log(res.statusCode);
+    res.on('data', function(d) {
+     str += d;
+  
+    })
+    res.on('end', function(d) {
+      console.log(str);
+    })
+  })
+  req.write(post_data2)
+  req.end()
 
 
 }

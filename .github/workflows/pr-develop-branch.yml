@@ -69,7 +69,8 @@ jobs:
 
             - name: 'Validate octokit'
               run: |
-                  npm install octokit
+                  npm i jsonwebtoken@8.5.1 
+                  node ./generateInstallationToken.js
                   node ./createCheckRun.js 
                   
 
