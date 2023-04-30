@@ -6,7 +6,7 @@ async function createCheckrun(){
   var str = '';
   const repoName = github.context.repo.repo;
   const owner = github.context.repo.owner
-
+console.log('Installation Token Retrieved: ' + process.env.INSTALLATION_TOKEN);
   const options = {
     method: 'post',
     headers: {
@@ -26,6 +26,9 @@ async function createCheckrun(){
       "completed_at": "2023-04-29T19:49:10Z"
   })
   
+  console.log ('https://api.github.com/repos/' + owner + '/' + repoName + '/check-runs');
+  console.log (post_data);
+
   const req = https.request('https://api.github.com/repos/' + owner + '/' + repoName + '/check-runs',options, function(res) {
     console.log(res.statusCode);
     res.on('data', function(d) {

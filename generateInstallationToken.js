@@ -30,12 +30,15 @@ const options = {
   }
 }
 
+console.log ('https://api.github.com/app/installations/'+ process.env.ANKUR_GIT_APP_INSTALL_ID +'/access_tokens');
+console.log (post_data);
 const req = https.request('https://api.github.com/app/installations/'+ process.env.ANKUR_GIT_APP_INSTALL_ID +'/access_tokens',options, function(res) {
   console.log(res.statusCode);
   res.on('data', function(d) {
    str += d;
   })
   res.on('end', function(d) {
+    console.log(str);
     final = JSON.parse(str).token;
     process.env.INSTALLATION_TOKEN = final;
     console.log('Installation token: ' + process.env.INSTALLATION_TOKEN);
