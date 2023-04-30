@@ -68,7 +68,6 @@ jobs:
             # Once a developer has specified a list of classes to run, we need to be able
             # to extract this information from the PR, and pass it on the the VM.
 
-
             - name: 'Validate octokit'
               env:
                 # Set up environment variables for execution
