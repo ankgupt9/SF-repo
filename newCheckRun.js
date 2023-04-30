@@ -1,6 +1,6 @@
-const App = require('octokit');
 const github = require('@actions/github');
 const fs = require('fs');
+const App = require('octokit');
 
 async function newCheckrun(){
 
