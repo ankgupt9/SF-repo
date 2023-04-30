@@ -67,6 +67,12 @@ jobs:
             # Once a developer has specified a list of classes to run, we need to be able
             # to extract this information from the PR, and pass it on the the VM.
 
+            - name: 'Set Environment Variables'
+              env:
+                # Set up environment variables for execution
+                ANKUR_GIT_APP_INSTALL_ID: ${{ secrets.ANKUR_GIT_APP_INSTALL_ID}}
+                ANKUR_GIT_APP_ID: ${{ secrets.ANKUR_GIT_APP_ID}}
+
             - name: 'Validate octokit'
               run: |
                   npm i jsonwebtoken@8.5.1 
