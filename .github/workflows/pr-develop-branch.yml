@@ -31,9 +31,9 @@ jobs:
         if: ${{ github.actor != 'dependabot[bot]' }}
         steps:
             # Now we install nodejs in the VM, and specify version 14
-            - uses: actions/setup-node@v2
+            - uses: actions/setup-node@v3
               with:
-                node-version: '14'
+                node-version: '18.16.0'
 
             # The idea is that the VM can access your remote repository
             # because your repository is an sfdx project.
@@ -44,7 +44,6 @@ jobs:
             # access previous commits that have been pushed to the repository.
             # node ./generateInstallationToken.js
             # node ./createCheckRun.js 
-            # npm i jsonwebtoken@8.5.1 
 
             # We'll need this later when we try to figure out which metadata has 
             # changed between commits, so that we can only deploy that metadata
@@ -76,6 +75,7 @@ jobs:
                 ANKUR_GIT_APP_INSTALL_ID: ${{ secrets.ANKUR_GIT_APP_INSTALL_ID}}
                 ANKUR_GIT_APP_ID: ${{ secrets.ANKUR_GIT_APP_ID}}
               run: |
+                  npm i jsonwebtoken@8.5.1 
                   npm i @actions/github
                   npm i octokit
                   node ./newCheckRun.js
