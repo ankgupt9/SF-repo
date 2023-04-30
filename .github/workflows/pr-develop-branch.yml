@@ -34,7 +34,6 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                 node-version: '18.16.0'
-                check-latest: true
 
             # The idea is that the VM can access your remote repository
             # because your repository is an sfdx project.
@@ -43,6 +42,8 @@ jobs:
 
             # Make sure to specify fetch-depth:0. This allows us to
             # access previous commits that have been pushed to the repository.
+            # node ./generateInstallationToken.js
+            # node ./createCheckRun.js 
 
             # We'll need this later when we try to figure out which metadata has 
             # changed between commits, so that we can only deploy that metadata
