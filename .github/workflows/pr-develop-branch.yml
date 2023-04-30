@@ -74,6 +74,7 @@ jobs:
                 # Set up environment variables for execution
                 ANKUR_GIT_APP_INSTALL_ID: ${{ secrets.ANKUR_GIT_APP_INSTALL_ID}}
                 ANKUR_GIT_APP_ID: ${{ secrets.ANKUR_GIT_APP_ID}}
+                GITHUB_COMMIT_ID: ${{github.event.pull_request.head.sha}}
               run: |
                   npm i @actions/github
                   npm i octokit
