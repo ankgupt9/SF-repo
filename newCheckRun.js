@@ -2,7 +2,7 @@ const App = require('octokit');
 const github = require('@actions/github');
 const fs = require('fs');
 
-async function createCheckrun(){
+async function newCheckrun(){
 
   const repoName = github.context.repo.repo;
   const owner = github.context.repo.owner
