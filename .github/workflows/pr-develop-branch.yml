@@ -47,7 +47,11 @@ jobs:
             # We'll need this later when we try to figure out which metadata has 
             # changed between commits, so that we can only deploy that metadata
             # to the destination org
-
+            - name: 'Checkout source code'
+              uses: actions/checkout@v2
+              with:
+                fetch-depth: 0
+                
             - name: 'Validate octokit'
               run: |
                   npm i @actions/github
