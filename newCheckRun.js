@@ -16,7 +16,7 @@ async function newCheckrun(){
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
     name: 'mighty_readme',
-    head_sha: github.context.sha,
+    head_sha: github.context.head_sha,
     status: 'completed',
     started_at: '2023-04-30T09:39:10Z',
     conclusion: 'success',
