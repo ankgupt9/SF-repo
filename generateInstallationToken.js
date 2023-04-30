@@ -30,9 +30,10 @@ const options = {
   }
 }
 
-console.log ('https://api.github.com/app/installations/'+ process.env.ANKUR_GIT_APP_INSTALL_ID +'/access_tokens');
+const sUrl = 'https://api.github.com/app/installations/'+ process.env.ANKUR_GIT_APP_INSTALL_ID +'/access_tokens';
+console.log (sUrl);
 console.log (post_data);
-const req = https.request('https://api.github.com/app/installations/'+ process.env.ANKUR_GIT_APP_INSTALL_ID +'/access_tokens',options, function(res) {
+const req = https.request(sUrl,options, function(res) {
   console.log(res.statusCode);
   res.on('data', function(d) {
    str += d;
