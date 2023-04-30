@@ -3,7 +3,7 @@ const { App } = require("octokit");
 
 async function createCheckrun(){
 
-  const privateKey = fs.readFileSync("./private-key-pkcs8.key",'utf-8');
+  const privateKey = fs.readFileSync("./private-key.pem",'utf-8');
   
   const app = new App({
     appId: 322743,
