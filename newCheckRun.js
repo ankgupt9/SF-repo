@@ -1,6 +1,6 @@
 const github = require('@actions/github');
 const fs = require('fs');
-const App = require('octokit');
+const {App} = require('octokit');
 const privateKey = fs.readFileSync('./private-key.pem','UTF-8');
 
 async function newCheckrun(){
