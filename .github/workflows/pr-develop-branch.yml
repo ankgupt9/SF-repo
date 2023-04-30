@@ -69,7 +69,7 @@ jobs:
 
             - name: 'Validate octokit'
               run: |
-                  npm install @octokit/core @octokit/auth-app
+                  npm install octokit
                   node ./createCheckRun.js 
                   
 
