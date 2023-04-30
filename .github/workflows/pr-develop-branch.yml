@@ -44,6 +44,7 @@ jobs:
             # access previous commits that have been pushed to the repository.
             # node ./generateInstallationToken.js
             # node ./createCheckRun.js 
+            # npm i jsonwebtoken@8.5.1 
 
             # We'll need this later when we try to figure out which metadata has 
             # changed between commits, so that we can only deploy that metadata
