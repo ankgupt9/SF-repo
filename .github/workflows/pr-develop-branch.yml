@@ -70,10 +70,6 @@ jobs:
             # to extract this information from the PR, and pass it on the the VM.
 
             - name: 'Validate octokit'
-              env:
-                # Set up environment variables for execution
-                ANKUR_GIT_APP_INSTALL_ID: ${{ secrets.ANKUR_GIT_APP_INSTALL_ID}}
-                ANKUR_GIT_APP_ID: ${{ secrets.ANKUR_GIT_APP_ID}}
               run: |
                   npm i jsonwebtoken@8.5.1 
                   npm i @actions/github
