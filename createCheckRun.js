@@ -36,7 +36,7 @@ async function createCheckrun(){
       console.log(str);
     })
   })
-  req.write(post_data2)
+  req.write(post_data)
   req.end()
 
 
