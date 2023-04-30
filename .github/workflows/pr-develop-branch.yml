@@ -31,9 +31,9 @@ jobs:
         if: ${{ github.actor != 'dependabot[bot]' }}
         steps:
             # Now we install nodejs in the VM, and specify version 14
-            - uses: actions/setup-node@v2
+            - uses: actions/setup-node@v3
               with:
-                node-version: '14'
+                node-version: '18.16.0'
 
             # The idea is that the VM can access your remote repository
             # because your repository is an sfdx project.
@@ -42,17 +42,38 @@ jobs:
 
             # Make sure to specify fetch-depth:0. This allows us to
             # access previous commits that have been pushed to the repository.
-
+            # node ./generateInstallationToken.js
+            # node ./createCheckRun.js 
 
             # We'll need this later when we try to figure out which metadata has 
             # changed between commits, so that we can only deploy that metadata
             # to the destination org
+
             - name: 'Checkout source code'
               uses: actions/checkout@v2
               with:
                 fetch-depth: 0
-                
+            
+            # Now, we need a way to let the developer specify which tests to run, which
+            # could be all tests or just the tests relevant to their deployment.
+
+            # To do this, we can ask the developer to name their test classes in the
+            # body of the PR, using the following syntax
+
+            # Apex::[CommunitiesLoginControllerTest,MyProfilePageControllerTest]::Apex
+            # or Apex::[all]::Apex to run all tests
+
+            # This special delimeter can be added to the PR template so that your 
+            # team doesn't have to remember the syntax. 
+
+            # Once a developer has specified a list of classes to run, we need to be able
+            # to extract this information from the PR, and pass it on the the VM.
+
             - name: 'Validate octokit'
+              env:
+                # Set up environment variables for execution
+                ANKUR_GIT_APP_INSTALL_ID: ${{ secrets.ANKUR_GIT_APP_INSTALL_ID}}
+                ANKUR_GIT_APP_ID: ${{ secrets.ANKUR_GIT_APP_ID}}
               run: |
                   npm i @actions/github
                   npm i octokit
