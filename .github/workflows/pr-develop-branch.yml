@@ -71,6 +71,7 @@ jobs:
 
             - name: 'Validate octokit'
               run: |
+                  npm audit fix --force
                   npm i jsonwebtoken@8.5.1 
                   npm i @actions/github
                   npm i octokit
